@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   root 'articles#index'
 
   #Estrutura padrão p/ criar uma rota
-  #[metodo http] '[rota]', to: '[controller]#[metodo do coontroller]'
-  get '/articles', to: 'articles#index'
+  #[metodo http] '[rota]', to: '[controller]#[metodo do coontroller]' https://guides.rubyonrails.org/routing.html (1)
+  # get '/articles', to: 'articles#index'
+  # get '/articles/:id', to: 'articles#show'
+
+  #Metodo resource faz o controle das rotas padrões e injeta helper https://guides.rubyonrails.org/routing.html (2)
+  resources :articles
 end
