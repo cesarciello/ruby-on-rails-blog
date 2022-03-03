@@ -1,0 +1,36 @@
+
+
+<style>
+    main.new_article form div {
+        display: flex;
+        flex-direction: column;
+        margin: 0 0 1rem 0;
+    }
+    main.new_article form div input, textarea {
+        max-width: 15rem;
+    }
+</style>
+
+<main class="new_article">
+    <h1>Novo Article</h1>
+
+    <%= form_with model: @article, data: { turbo: false } do |form|%>
+        <div>
+            <%= form.label :title %>
+            <%= form.text_field :title %>
+            <% @article.errors.full_messages_for(:title).each do |message| %>
+                <div> <%= message %> </div>
+            <% end %>
+        </div>
+        <div>
+            <%= form.label :body %>
+            <%= form.text_area :body %>
+            <% @article.errors.full_messages_for(:body).each do |message| %>
+                <div> <%= message %> </div>
+            <% end %>
+        </div>
+        <div>
+            <%= form.submit %>
+        </div>
+    <% end %>
+</main>
