@@ -7,6 +7,12 @@
         <%= link_to "edit", edit_article_path(@article) %>
     </li>
     <li>
+        <%= link_to 'delete', 
+            article_path(@article),
+            data: { "turbo-method": :delete, 'turbo-confirm': 'Are you sure?' }
+        %>
+    </li>
+    <li>
         <%= link_to "back", root_path %>
     </li>
 </ul>
