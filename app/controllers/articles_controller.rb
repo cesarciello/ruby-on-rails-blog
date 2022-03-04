@@ -2,7 +2,10 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: %i[show edit update destroy]
 
   def index
-    @articles = Article.all
+    @highlights = Article.desc_order.first(3);
+    highlights_ids =  Article.get_id_list_string(@highlights)
+    current_page = (params[:page] || 1).to_i
+    @articles = Article.without_highlights(highlights_ids).desc_order.page(current_page)
   end
 
   def show
