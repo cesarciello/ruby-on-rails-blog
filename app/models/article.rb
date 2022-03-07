@@ -1,13 +1,16 @@
 class Article < ApplicationRecord
-    validates :title, presence: true, length: { minimum: 5 }
-    validates :body, presence: true, length: { minimum: 10 }
+  belongs_to :category
+  belongs_to :user
 
-    paginates_per 2 
+  validates :title, presence: true, length: { minimum: 5 }
+  validates :body, presence: true, length: { minimum: 10 }
 
-    scope :desc_order, -> { order(created_at: :desc) }
-    scope :without_highlights, -> (ids) { where("id NOT IN(#{ids})") if ids.present? }
+  paginates_per 2
 
-    def self.get_id_list_string(articles)
-        articles.pluck(:id).join(",")
-    end
+  scope :desc_order, -> { order(created_at: :desc) }
+  scope :without_highlights, ->(ids) { where("id NOT IN(#{ids})") if ids.present? }
+
+  def self.get_id_list_string(articles)
+    articles.pluck(:id).join(",")
+  end
 end
