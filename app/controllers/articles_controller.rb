@@ -6,11 +6,11 @@ class ArticlesController < ApplicationController
 
   def index
     @categories = Category.sorted
-
     category_filter = @categories.select { |category| category.name == params[:category] }[0] if params[:category].present?
 
     @highlights = Article.includes(:category, :user)
                          .filter_by_category(category_filter)
+                         .filter_by_archive(params[:month_year])
                          .desc_order
                          .first(3)
 
@@ -19,8 +19,11 @@ class ArticlesController < ApplicationController
     @articles = Article.includes(:category, :user)
                        .without_highlights(highlights_ids)
                        .filter_by_category(category_filter)
+                       .filter_by_archive(params[:month_year])
                        .desc_order
                        .page(current_page)
+
+    @archives = Article.group_by_month(:created_at, format: "%B %Y").count
   end
 
   def show; end
@@ -39,8 +42,7 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @article = Article.find(params[:id])
