@@ -1,12 +1,16 @@
 <article class="blog-post">
   <h2 class="blog-post-title"><%= article.title %></h2>
-  <p class="blog-post-meta"><%= month_day_comma_year(article.created_at)%> by <%= article.user.email %></p>
+  <p class="blog-post-meta">
+    <%= render 'articles/components/article_detail', article: article%>
+  </p>
   <p><%= truncate(article.body, length: 150) %></p>
   <p><%= link_to "Continue reading ...", article, class: "btn-link" %></p>
-  <%= link_to "edit", edit_article_path(article), class: "btn btn-secondary" %>
-  <%= link_to 'delete', 
+  <%= link_to "edit", edit_article_path(article), class: "btn btn-primary" if policy(article).update? %>
+  <% if policy(article).destroy? %>
+    <%= link_to 'delete', 
         article_path(article),
         data: { "turbo-method": :delete, 'turbo-confirm': 'Are you sure?' },
         class: "btn btn-danger" 
     %>
+  <% end %>
 </article>

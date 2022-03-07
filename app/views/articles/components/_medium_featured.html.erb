@@ -8,10 +8,10 @@
         <%= article.title %>
       </h3>
       <div class="mb-1 text-muted">
-        <%= month_day(article.created_at) %> by <%= article.user.email %>
+        <%= render 'articles/components/article_detail', article: article%>
       </div>
       <p class="card-text mb-auto">
-        <%= truncate(article.body, length: 130) %>
+        <%= truncate(article.body, length: 110) %>
       </p>
       <%= link_to "Continue reading", article, class: "stretched-link" %>
     </div>

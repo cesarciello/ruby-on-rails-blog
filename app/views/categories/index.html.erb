@@ -1,6 +1,6 @@
 <h1>Categories</h1>
 <p>
-  <%= link_to "New category", new_category_path, class: 'btn btn-primary' %>
+  <%= link_to "New category", new_category_path, class: 'btn btn-primary' if policy(:category).new? %>
 </p>
 <table class="table table-striped table-hover table-bordered">
   <thead>
@@ -16,11 +16,13 @@
           <%= category.name %>
         </td>
         <td>
-          <%= link_to "Edit", edit_category_path(category) %>
-          <%= link_to 'Delete', 
+          <%= link_to "Edit", edit_category_path(category) if policy(:category).edit? %>
+          <% if policy(:category).destroy? %>
+            <%= link_to 'Delete', 
             category_path(category),
             data: { "turbo-method": :delete, 'turbo-confirm': 'Are you sure?' }
           %>
+          <% end %>
         </td>
       </tr>
     <% end %>
