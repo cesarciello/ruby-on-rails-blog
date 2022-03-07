@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   # get '/articles/:id', to: 'articles#show'
 
   # Metodo resource faz o controle das rotas padrões e injeta helper https://guides.rubyonrails.org/routing.html (2)
-  resources :articles
+  resources :articles do
+    resources :comments, only: %i[create destroy]
+  end
   resources :categories, except: [:show]
 end
