@@ -1,10 +1,16 @@
-<h2 class="mt-4">Comments</h2>
+<h2 class="mt-4">
+  <%= t('articles.show.comments')%>
+</h2>
 <% article.comments.each do |comment| %>
   <%= render 'comments/comment', comment: comment %>
 <% end %>
-<h3>Add a comment</h3>
+<h3>
+  <%= t('articles.show.add_comment')%>
+</h3>
 <% if policy(:comment).create? %>
   <%= render 'comments/form', article: article %>
 <% else %>
-  <p>Please, login to create a comment</p>
+  <p>
+    <%= t('articles.show.login_create_comment')%>
+  </p>
 <% end %>

@@ -4,13 +4,19 @@
     <%= render 'articles/components/article_detail', article: article%>
   </p>
   <p><%= truncate(article.body, length: 150) %></p>
-  <p><%= link_to "Continue reading ...", article, class: "btn-link" %></p>
-  <%= link_to "edit", edit_article_path(article), class: "btn btn-primary" if policy(article).update? %>
-  <% if policy(article).destroy? %>
-    <%= link_to 'delete', 
+  <p><%= link_to t('articles.continue_reading'), article, class: "btn-link" %></p>
+  <div style="display: flex; flex-direction: row; column-gap: 1rem;">
+    <div>
+      <%= link_to t('app.button.edit'), edit_article_path(article), class: "btn btn-primary" if policy(article).update? %>
+    </div>
+    <div>
+      <% if policy(article).destroy? %>
+        <%= button_to t('app.button.destroy'), 
         article_path(article),
-        data: { "turbo-method": :delete, 'turbo-confirm': 'Are you sure?' },
+        method: :delete,
         class: "btn btn-danger" 
     %>
-  <% end %>
+      <% end %>
+    </div>
+  </div>
 </article>

@@ -1,6 +1,4 @@
-
-
 <main class="update_article">
-    <h1>Edit Article</h1>
-     <%= render 'articles/components/form', article: @article %>
+  <h1><%= t('app.edit.title', model: Article.model_name.human) %></h1>
+  <%= render 'articles/components/form', article: @article %>
 </main>

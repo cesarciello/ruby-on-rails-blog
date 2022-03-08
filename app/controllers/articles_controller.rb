@@ -7,7 +7,11 @@ class ArticlesController < ApplicationController
 
   def index
     @categories = Category.sorted
-    category_filter = @categories.select { |category| category.name == params[:category] }[0] if params[:category].present?
+    if params[:category].present?
+      category_filter = @categories.select do |category|
+                          category.name == params[:category]
+                        end [0]
+    end
 
     @highlights = Article.includes(:category, :user)
                          .filter_by_category(category_filter)
@@ -24,7 +28,7 @@ class ArticlesController < ApplicationController
                        .desc_order
                        .page(current_page)
 
-    @archives = Article.group_by_month(:created_at, format: "%B %Y").count
+    @archives = Article.group_by_month(:created_at, format: '%B %Y', locale: :en).count
   end
 
   def show
@@ -40,7 +44,7 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.new(article_params)
 
     if @article.save
-      redirect_to @article, notice: "Article was successfully created."
+      redirect_to @article, notice: 'Article was successfully created.'
     else
       render :new
     end
@@ -52,7 +56,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
 
     if @article.update(article_params)
-      redirect_to @article, notice: "Article was successfully updated."
+      redirect_to @article, notice: 'Article was successfully updated.'
     else
       render :edit
     end
@@ -60,7 +64,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    redirect_to root_path, status: :see_other, notice: "Article was successfully destroyed."
+    redirect_to root_path, status: :see_other, notice: 'Article was successfully destroyed.'
   end
 
   private

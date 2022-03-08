@@ -88,3 +88,5 @@ gem "pundit", "~> 2.2"
 gem "rolify", "~> 6.0"
 
 gem "groupdate", "~> 6.0"
+
+gem 'devise-i18n'

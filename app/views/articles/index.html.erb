@@ -9,10 +9,10 @@
 <div class="row g-5">
   <div class="col-md-8">
     <h3 class="pb-4 mb-4 fst-italic border-bottom">
-      From the Firehose
+      <%= t('.subtitle') %>
     </h3>
     <p>
-      <%= link_to 'New article', new_article_path, class: "btn btn-success" if user_signed_in? %>
+      <%= link_to t('.new_article'), new_article_path, class: "btn btn-success" if user_signed_in? %>
     </p>
     <% @articles.each do |article| %>
       <%= render 'articles/components/article', article: article %>

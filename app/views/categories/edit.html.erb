@@ -1,6 +1,8 @@
-<h1>Editing category</h1>
+<h1>
+  <%= t('app.edit.title', model: Category.model_name.human) %>
+</h1>
 <%= render "form", category: @category %>
 <br>
 <div>
-  <%= link_to "Back to categories", categories_path %>
+  <%= link_to link_to t('app.button.back'), categories_path %>
 </div>
