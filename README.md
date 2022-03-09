@@ -1,24 +1,51 @@
-# README
+# Ruby on Rails Blog
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Building a blog using Bootstrap 5 with Ruby on Rails 7 in MVC pattern.
 
-Things you may want to cover:
+<table>
+  <tr>
+    <td>Ruby version</td>
+    <td>
+      3.0.3
+    </td>
+  </tr>
+  <tr>
+    <td>Rails version</td>
+    <td>
+      7.0.2
+    </td>
+  </tr>
+  <tr>
+    <td>Database</td>
+    <td>
+      SQLite3 (dev)
+    </td>
+  </tr>
+</table>
 
-* Ruby version
+## Initial settings to run the project
 
-* System dependencies
+```bash
+# clone the project
+git clone https://github.com/cesarciello/ruby-on-rails-blog
 
-* Configuration
+# enter the cloned directory
+cd blogstrap
 
-* Database creation
+# install Ruby on Rails dependencies
+bundle install
 
-* Database initialization
+# install Node dependencies
+yarn install
 
-* How to run the test suite
+# create the development and test databases
+rails db:create
 
-* Services (job queues, cache servers, search engines, etc.)
+# create the tables
+rails db:migrate
 
-* Deployment instructions
+# run the project
+rails s
+```
 
-* ...
+Open the browser at the address `http://localhost:3000`
